@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="jp" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<table>
+		<tbody>
+			<tr>
+				<td >資格 :</td>
+<!-- 				<td  th:each="ls : ${licenses}" th:text="${ls.licenseName}">なし</td> -->
+				<td th:text="${skillDetail.license}">なし</td>
+			</tr>
+			<tr>
+				<td>環境(OS) :</td>
+				<td th:text="${skillDetail.os}">なし</td>
+			</tr>
+			<tr>
+				<td>DB :</td>
+				<td th:text="${skillDetail.db}">なし</td>
+			</tr>
+			<tr>
+				<td>言語 :</td>
+				<td th:text="${skillDetail.developLanguage}">なし</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>
