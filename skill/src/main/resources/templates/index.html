@@ -33,25 +33,19 @@
 						<th>国籍</th>
 						<th>経験年数</th>
 						<th>単価</th>
-						<th>資格</th>
-						<th>環境（OS）</th>
-						<th>DB</th>
-						<th>言語</th>
+						<th>操作</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr class="openRow" th:each="stuffMeta,iterStat : ${stuffMetas}">
-						<th scope="row" th:text="${stuffMeta.id}">1</th>
-						<td th:text="${stuffMeta.name}">Mark</td>
+						<th th:text="${stuffMeta.id}"></th>
+						<td th:text="${stuffMeta.name}"></td>
 						<td th:text="${stuffMeta.age}"></td>
 						<td th:text="${stuffMeta.sex}"></td>
 						<td th:text="${stuffMeta.nationality}"></td>
 						<td th:text="${stuffMeta.experienceYear}"></td>
 						<td th:text="${stuffMeta.price}"></td>
-						<td th:text="${stuffMeta.license}"></td>
-						<td th:text="${stuffMeta.os}"></td>
-						<td th:text="${stuffMeta.db}"></td>
-						<td th:text="${stuffMeta.developLanguage}"></td>
+						<td><a th:href="@{edit} + '/' + ${stuffMeta.id}">Edit</a></td>
 					</tr>
 				</tbody>
 			</table>
@@ -80,7 +74,6 @@
 						console.log("DONE");
 					}
 				});
-				
 			}
 			function format ( d ) {
 			    // `d` is the original data object for the row
@@ -120,6 +113,14 @@
 // 			            { "data": "salary" }
 // 			        ],
 // 			        "order": [[1, 'asc']]
+			        "columnDefs": [
+			                       {
+			                    	   // hidden a column
+// 			                           "targets": [ 0 ],
+// 			                           "visible": false,
+// 			                           "searchable": false
+			                       }
+			                   ]
 			    } );
 				$('#stuffAll')
 				.removeClass( 'display' )
