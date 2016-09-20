@@ -14,7 +14,7 @@ spring:
     encoding: UTF-8
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/skill?autoReconnect=true&useSSL=false
-    username: root
+    username: wicresoft
     password: wsjp
     driverClassName: com.mysql.jdbc.Driver
 
@@ -27,6 +27,6 @@ spring:
     encoding: UTF-8
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/skill?autoReconnect=true&useSSL=false
-    username: root
+    username: wicresoft
     password: wsjp
     driverClassName: com.mysql.jdbc.Driver
