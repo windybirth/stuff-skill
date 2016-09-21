@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="jp" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<!-- Required meta tags always come first -->
+		<meta charset="utf-8">
+		<meta http-equiv="Content-Type" content="text/html">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		
+		<!-- 共通のリンクとスクリプト -->
+		<link th:replace="include :: head">
+<!-- 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" integrity="sha384-2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous"> -->
+		<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+		<style type="text/css">
+			.table thead tr {
+			   color: #fff;
+			   background-color: #333;
+			}
+			.table {
+			  border: 1px solid #eceeef;
+			}
+			
+			.table th,
+			.table td {
+			  border: 1px solid #eceeef;
+			}
+			
+			.table thead th,
+			.table thead td {
+			  border-bottom-width: 2px;
+			}
+		</style>
+	</head>
+	
+	<body>
+		<div th:replace="include :: header"></div>
+		<div class="container">
+			<h2 class="col-sm-offset-4 col-sm-8"><span th:text="${category}"></span>スキル情報一覧</h2>
+		</div>
+		<div align="center" style="margin: 10px">
+			<table id="stuffAll" class="table table-hover">
+				<thead class="thead-inverse">
+					<tr>
+						<th>#</th>
+						<th>名前</th>
+						<th>年齢</th>
+						<th>性別</th>
+						<th>国籍</th>
+						<th>経験年数</th>
+						<th>単価</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="openRow" th:each="stuffMeta,iterStat : ${stuffMetas}">
+						<th th:text="${stuffMeta.id}"></th>
+						<td th:text="${stuffMeta.name}"></td>
+						<td th:text="${stuffMeta.age}"></td>
+						<td th:text="${stuffMeta.sex}"></td>
+						<td th:text="${stuffMeta.nationality}"></td>
+						<td th:text="${stuffMeta.experienceYear}"></td>
+						<td th:text="${stuffMeta.price}"></td>
+						<td><a th:href="@{edit} + '/' + ${stuffMeta.id}">Edit</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
+		<div th:include="include :: footer"></div>
+		
+		<script type="text/javascript">
+			/* Formatting function for row details - modify as you need */
+			function stuffDetailInfo( rowId, stuffId ) {
+				$.ajax({
+					type : "GET",
+// 					contentType : "application/json",
+					url : "/stuffDetail/" + stuffId,
+// 					data : JSON.stringify(data),
+					dataType : 'html',
+					cache: false,
+					timeout : 10000,
+					success : function(data) {
+						console.log("SUCCESS: ", data);
+						$('#' + rowId).html(data);
+					},
+					error : function(e) {
+						console.log("ERROR: ", e);
+						$('#' + rowId).html('サーバーとの通信で問題が発生しました。 後でもう一度お試しください。');
+					},
+					done : function(e) {
+						console.log("DONE");
+					}
+				});
+			}
+			function format ( d ) {
+			    // `d` is the original data object for the row
+			    return '<table id="' + d + '" cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+			        '<tr>'+
+			            '<td>資格 :</td>'+
+			            '<td>Loading</td>'+
+			        '</tr>'+
+			        '<tr>'+
+			            '<td>環境(OS) :</td>'+
+			            '<td>Loading</td>'+
+			        '</tr>'+
+			        '<tr>'+
+			            '<td>DB :</td>'+
+			            '<td>Loading</td>'+
+			        '</tr>'+
+			        '<tr>'+
+			            '<td>言語 :</td>'+
+			            '<td>Loading</td>'+
+			        '</tr>'+
+			    '</table>';
+			}
+
+			$(document).ready(function() {
+			    var table = $('#stuffAll').DataTable( {
+// 			        "ajax": "../ajax/data/objects.txt",
+// 			        "columns": [
+// 			            {
+// 			                "className":      'details-control',
+// 			                "orderable":      false,
+// 			                "data":           null,
+// 			                "defaultContent": ''
+// 			            },
+// 			            { "data": "name" },
+// 			            { "data": "position" },
+// 			            { "data": "office" },
+// 			            { "data": "salary" }
+// 			        ],
+// 			        "order": [[1, 'asc']]
+			        "columnDefs": [
+			                       {
+			                    	   // hidden a column
+// 			                           "targets": [ 0 ],
+// 			                           "visible": false,
+// 			                           "searchable": false
+			                       }
+			                   ]
+			    } );
+				$('#stuffAll')
+				.removeClass( 'display' )
+// 				.addClass('table table-striped table-bordered');
+				
+			    // Add event listener for opening and closing details
+			    $('.openRow').on('click', function () {
+			        var tr = $(this).closest('tr');
+			        var row = table.row( tr );
+			 
+			        if ( row.child.isShown() ) {
+			            // This row is already open - close it
+			            row.child.hide();
+			            tr.removeClass('shown');
+			        }
+			        else {
+			            // Open this row
+			            var stuffId = row.data()[0];
+			            var rowId = "subrow" + stuffId;
+			            row.child( format(rowId) ).show();
+			            tr.addClass('shown');
+			            stuffDetailInfo(rowId, stuffId);
+			        }
+			    } );
+			} );
+		</script>
+	</body>
+</html>

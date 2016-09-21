@@ -1,5 +1,9 @@
 package jp.wicresoft.info;
 
+import javax.validation.constraints.Digits;
+
+import org.hibernate.validator.constraints.NotBlank;
+
 import jp.wicresoft.domain.StuffMeta;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,25 +16,24 @@ public class IndexViewInfo {
 
 	private Long id;
 	
+	@NotBlank
 	private String name;
 	
+	@NotBlank
+    @Digits(integer=3, fraction=0)
 	private Long age;
 	
+	@NotBlank
 	private String sex;
 	
+	@NotBlank
 	private String nationality;
 	
+	@NotBlank
 	private String experienceYear;
 	
+	@NotBlank
 	private String price;
-	
-	private String license;
-	
-	private String os;
-	
-	private String db;
-	
-	private String developLanguage;
 	
 	public IndexViewInfo(StuffMeta stuffMeta) {
 		
@@ -47,13 +50,5 @@ public class IndexViewInfo {
 		setExperienceYear(stuffMeta.getExperienceYear() + "年");
 		
 		setPrice(stuffMeta.getPrice() + "万");
-		
-		setLicense(stuffMeta.getLicense());
-		
-		setOs(stuffMeta.getOs());
-		
-		setDb(stuffMeta.getDb());
-		
-		setDevelopLanguage(stuffMeta.getDevelopLanguage());
 	}
 }

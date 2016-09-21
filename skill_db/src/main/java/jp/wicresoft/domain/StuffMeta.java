@@ -24,11 +24,5 @@ public class StuffMeta {
 	
 	private Long price;
 	
-	private String license;
-	
-	private String os;
-	
-	private String db;
-	
-	private String developLanguage;
+	private boolean isMember;
 }

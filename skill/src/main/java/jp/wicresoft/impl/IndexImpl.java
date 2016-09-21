@@ -48,6 +48,24 @@ public class IndexImpl {
 		return indexViewInfos;
 	}
 	
+	public List<IndexViewInfo> getSelfStuffMetaInfoAll() {
+		List<StuffMeta> stuffMetas  = stuffMetaRepository.findByIsMemberTrue();
+		List<IndexViewInfo> indexViewInfos = new ArrayList<>();
+		for (StuffMeta stuffMeta : stuffMetas) {
+			indexViewInfos.add(new IndexViewInfo(stuffMeta));
+		}
+		return indexViewInfos;
+	}
+	
+	public List<IndexViewInfo> getOtherStuffMetaInfoAll() {
+		List<StuffMeta> stuffMetas  = stuffMetaRepository.findByIsMemberFalse();
+		List<IndexViewInfo> indexViewInfos = new ArrayList<>();
+		for (StuffMeta stuffMeta : stuffMetas) {
+			indexViewInfos.add(new IndexViewInfo(stuffMeta));
+		}
+		return indexViewInfos;
+	}
+	
 	public IndexSkillDetailInfo getIndexSkillDetailInfo(long stuffId) {
 		IndexSkillDetailInfo indexSkillDetailInfo  = new IndexSkillDetailInfo();
 		// set skill detail info
