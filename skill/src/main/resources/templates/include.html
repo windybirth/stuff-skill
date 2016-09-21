@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="jp" xmlns:th="http://www.thymeleaf.org">
+	<head th:fragment="head">
+		<!-- Required meta tags always come first -->
+		<meta charset="utf-8">
+		<meta http-equiv="Content-Type" content="text/html">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<title>ウィクレソフト・ジャパン　スキル情報管理システム</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+		<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+		<style type="text/css">
+			body {
+				padding-top: 50px;
+			}
+		</style>
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+	</head>
+	<body>
+		<div class="navbar navbar-default navbar-fixed-top" th:fragment="header1">
+			<div class="container" align="center">
+				<h1>ウィクレソフト・ジャパン　スキル情報管理システム</h1>
+			</div>
+<!-- 			<hr> -->
+		</div>
+		
+		<nav th:fragment="header">
+			<div class="navbar navbar-inverse navbar-fixed-top">
+			    <div class="container">
+			        <div class="navbar-header">
+			            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+			                <span class="icon-bar"></span>
+			                <span class="icon-bar"></span>
+			                <span class="icon-bar"></span>
+			            </button>
+			            <a class="navbar-brand" href="#">スキル情報管理システム</a>
+			        </div>
+			        <div class="navbar-collapse collapse nav-collapse" id="nav_target">
+			            <ul class="nav navbar-nav">
+			                <li th:classappend="${page == 'home' ? 'active' : ''}"><a href="#" th:href="@{/}">Home</a></li>
+			                <li th:classappend="${page == 'new' ? 'active' : ''}"><a href="#" th:href="@{/new}">New</a></li>
+			                <li th:classappend="${page == 'search' ? 'active' : ''}"><a href="#" th:href="@{/search}">Search</a></li>
+			                <li th:classappend="${page == 'view' ? 'active' : ''}" class="dropdown">
+								<a data-toggle="dropdown" aria-haspopup="true"
+								aria-expanded="true"> View </a>
+								<ul class="dropdown-menu">
+									<li><a th:href="@{/self_stuff}">Self Stuff</a></li>
+									<li><a th:href="@{/other_stuff}">Other Stuff</a></li>
+									<li role="separator" class="divider"></li>
+									<li><a th:href="@{/all_stuff}">All Stuff</a></li>
+								</ul>
+							</li>
+							<li th:classappend="${page == 'master' ? 'active' : ''}">
+								<a data-toggle="dropdown" aria-haspopup="true"
+								aria-expanded="true">Master</a>
+								<ul class="dropdown-menu">
+									<li><a>...</a></li>
+								</ul>
+							</li>
+			            </ul>
+	<!-- 		            <ul class="nav navbar-nav navbar-right"> -->
+	<!-- 		                <li th:if="${#authorization.expression('!isAuthenticated()')}"><a href="/signin" th:href="@{/signin}">Sign in</a></li> -->
+	<!-- 		                <li th:if="${#authorization.expression('isAuthenticated()')}"><a href="/logout" th:href="@{/logout}">Logout</a></li> -->
+	<!-- 		            </ul> -->
+			        </div>
+			        <!--/.nav-collapse -->
+			    </div>
+			</div>
+		</nav>
+		
+		<!-- 			SAMPLE           -->
+		  <div class="navbar navbar-inverse navbar-fixed-top"  th:fragment="header3">
+		  <!-- ヘッダー部分 ================ -->
+		    <div class="navbar-header">
+		      <a class="navbar-brand" href="#">Bootstap</a>
+		      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav_target">
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		      </button>
+		    </div>
+		  <!-- 中央のナビゲーション部分 ================ -->
+		    <div class="collapse navbar-collapse" id="nav_target">
+		      <ul class="nav navbar-nav">
+		        <!-- リンクのみ -->
+		          <li class="active"><a href="#">Nav 1</a></li>
+		          <li><a href="#">Nav 2</a></li>
+		        <!-- Nav3 ドロップダウン -->
+		          <li class="dropdown">
+		            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Nav3 <span class="caret"></span></a>
+		            <ul class="dropdown-menu">
+		              <li><a href="#">link 1</a></li>
+		              <li><a href="#">link 2</a></li>
+		              <li class="divider"></li>
+		              <li><a href="#">link3</a></li>
+		            </ul>
+		          </li>
+		        <!-- Nav4 ドロップダウン -->
+		          <li class="dropdown">
+		            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Nav4 <span class="caret"></span></a>
+		            <ul class="dropdown-menu">
+		              <li><a href="#">link 1</a></li>
+		              <li><a href="#">link 2</a></li>
+		              <li class="divider"></li>
+		              <li><a href="#">link3</a></li>
+		            </ul>
+		          </li>
+		      </ul>
+		  <!-- 右寄せになる部分 ================ -->
+		      <ul class="nav navbar-nav navbar-right">
+		        <!-- リンクのみ -->
+		          <li><a href="#">Nav 5</a></li>
+		        <!-- Nav6 ドロップダウン -->
+		          <li class="dropdown">
+		            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Nav6 <span class="caret"></span></a>
+		            <ul class="dropdown-menu">
+		              <li><a href="#">link 1</a></li>
+		              <li><a href="#">link 2</a></li>
+		              <li class="divider"></li>
+		              <li><a href="#">link3</a></li>
+		            </ul>
+		          </li>
+		      </ul>
+		    </div>
+		  </div>
+		
+		
+		<div th:fragment="footer">
+			<div align="right" class="navbar-fixed-bottom">
+				&copy; 2016 WSJP
+			</div>
+	    </div>
+	</body>
+</html>

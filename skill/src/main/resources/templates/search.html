@@ -7,15 +7,14 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<meta http-equiv="x-ua-compatible" content="ie=edge">
 		
-		<title>Edit Page</title>
 		<!-- 共通のリンクとスクリプト -->
-		<link th:include="include :: head">
+		<link th:replace="include :: head">
 	</head>
 	
 	<body>
-		<div th:include="include :: header"></div>
-		<div align="center" style="margin: 10px">
-			<h1>Edit Page <span th:text="${id}"></span></h1>
+		<div th:replace="include :: header"></div>
+		<div class="container">
+			<h2 class="col-sm-offset-4 col-sm-8">スキル情報検索</h2>
 		</div>
 		
 		<div th:include="include :: footer"></div>
