@@ -13,4 +13,8 @@ public interface StuffMetaRepository extends Repository<StuffMeta, Long>{
 	public List<StuffMeta> findByIsMemberTrue();
 	
 	public List<StuffMeta> findByIsMemberFalse();
+	
+	public void save(StuffMeta stuffMeta);
+	
+	public void saveAndFlush(StuffMeta stuffMeta);
 }

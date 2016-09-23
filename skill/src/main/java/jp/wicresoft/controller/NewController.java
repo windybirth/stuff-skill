@@ -1,10 +1,13 @@
 package jp.wicresoft.controller;
 
+import javax.validation.Valid;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jp.wicresoft.impl.NewImpl;
@@ -16,17 +19,25 @@ public class NewController {
 	@Autowired
 	NewImpl newImpl;
 	
+	Logger logger = LoggerFactory.getLogger(NewController.class);
+	
 	@RequestMapping(value={"/new"})
 	public String loadPage(Model model) {
-		model.addAttribute("stuffInfo", new IndexViewInfo());
+		IndexViewInfo indexViewInfo = new IndexViewInfo();
+		model.addAttribute("indexViewInfo", indexViewInfo);
 		model.addAttribute("page", "new");
 		return "new";
 	}
 	
 	@RequestMapping(value={"/new_add"})
-	public String addInfo(@Validated IndexViewInfo stuffInfo, Model model, BindingResult bindingResult) {
-		System.out.println(stuffInfo.getName());
-		model.addAttribute("stuffInfo", stuffInfo);
-		return "new";
+	public String addInfo(@Valid IndexViewInfo indexViewInfo, BindingResult bindingResult, Model model) {
+		if (bindingResult.hasErrors()) {
+			model.addAttribute("indexViewInfo", indexViewInfo);
+			model.addAttribute("page", "new");
+            return "new";
+        }
+		logger.info("Add stuff: " + indexViewInfo.getName());
+		newImpl.addOneStuff(indexViewInfo);
+		return "redirect:all_stuff";
 	}
 }
