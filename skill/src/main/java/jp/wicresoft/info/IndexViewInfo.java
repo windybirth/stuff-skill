@@ -14,14 +14,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class IndexViewInfo {
 
-	private Long id;
+	private String id;
 	
 	@NotBlank
 	private String name;
 	
 	@NotBlank
-    @Digits(integer=3, fraction=0)
-	private Long age;
+    @Digits(integer=2, fraction=0)
+	private String age;
 	
 	@NotBlank
 	private String sex;
@@ -30,25 +30,54 @@ public class IndexViewInfo {
 	private String nationality;
 	
 	@NotBlank
+	@Digits(integer=2, fraction=0)
 	private String experienceYear;
 	
 	@NotBlank
+	@Digits(integer=10, fraction=0)
 	private String price;
 	
+	private boolean member;
+	
+	/**
+	 * load StuffMeta domain info
+	 * @param stuffMeta
+	 */
 	public IndexViewInfo(StuffMeta stuffMeta) {
 		
-		setId(stuffMeta.getId());
+		setId(stuffMeta.getId().toString());
 		
 		setName(stuffMeta.getName());
 		
-		setAge(stuffMeta.getAge());
+		setAge(stuffMeta.getAge().toString());
 		
-		setSex(stuffMeta.isSex() ? "女" : "男");
+		setSex(stuffMeta.isSex() ? "true" : "false");
 		
 		setNationality(stuffMeta.getNationality());
 		
 		setExperienceYear(stuffMeta.getExperienceYear() + "年");
 		
 		setPrice(stuffMeta.getPrice() + "万");
+		
+		setMember(stuffMeta.isMember());
+	}
+	
+	/**
+	 * translate to StuffMeta domain
+	 * @return
+	 */
+	public StuffMeta toStuffMeta() {
+		StuffMeta stuffMeta = new StuffMeta();
+		
+		stuffMeta.setName(getName());
+		stuffMeta.setAge(Long.parseLong(getAge()));
+		// TODO
+		stuffMeta.setSex(false);
+		stuffMeta.setExperienceYear(Long.parseLong(getExperienceYear()));
+		stuffMeta.setPrice(Long.parseLong(getPrice()));
+		stuffMeta.setNationality(getNationality());
+		stuffMeta.setMember(isMember());
+		
+		return stuffMeta;
 	}
 }

@@ -56,7 +56,7 @@
 						<th th:text="${stuffMeta.id}"></th>
 						<td th:text="${stuffMeta.name}"></td>
 						<td th:text="${stuffMeta.age}"></td>
-						<td th:text="${stuffMeta.sex}"></td>
+						<td th:text="${stuffMeta.sex == 'true'} ? 男 :女 ">
 						<td th:text="${stuffMeta.nationality}"></td>
 						<td th:text="${stuffMeta.experienceYear}"></td>
 						<td th:text="${stuffMeta.price}"></td>
