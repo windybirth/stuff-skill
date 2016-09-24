@@ -13,5 +13,5 @@
 -  Tomcat 8
 -  STS 3.8.1
 
-*NOTE:* You'll still need to download lombok, or doubleclick on the lombok.jar file downloaded by maven / ivy / gradle, to install lombok into your eclipse installation.
+*NOTE:* You'll still need to download lombok, or doubleclick on the lombok.jar file downloaded by maven / ivy / gradle, to install lombok into your eclipse installation.  
 [Download lombok.jar] (https://projectlombok.org/downloads/lombok.jar)
