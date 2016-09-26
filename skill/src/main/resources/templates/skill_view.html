@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="jp" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<!-- Required meta tags always come first -->
+		<meta charset="utf-8">
+		<meta http-equiv="Content-Type" content="text/html">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<!-- 共通のリンクとスクリプト -->
+		<link th:include="include :: head">
+	</head>
+	
+	<body>
+		<div th:include="include :: header"></div>
+		<div class="container">
+			<h2 class="col-sm-offset-4 col-sm-8">スキル マスター</h2>
+		</div>
+		<div align="center" style="margin: 10px">
+			<table id="stuffAll" class="table table-hover">
+				<thead class="thead-inverse">
+					<tr>
+						<th>#</th>
+						<th>スキル</th>
+						<th>詳細情報</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="openRow" th:each="skill,iterStat : ${skills}">
+						<th th:text="${skill.id}"></th>
+						<td th:text="${skill.name}"></td>
+						<td><a th:href="@{skill_edit} + '/' + ${skill.id}">Edit</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
+		<div th:include="include :: footer"></div>
+		
+		<script type="text/javascript">
+			$(document).ready(function() {
+			    var table = $('#stuffAll').DataTable( {
+			    	
+			    }
+		</script>
+	</body>
+</html>
