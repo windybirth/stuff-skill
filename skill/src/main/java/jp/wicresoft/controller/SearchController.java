@@ -36,12 +36,16 @@ public class SearchController {
 		logger.info("Search for: " + skillSearchInfo.getLsSkill());
 		model.addAttribute("page", "search");
 		
-		Long condition = Long.parseLong(skillSearchInfo.getLsSkill());
-		List<IndexViewInfo> indexViewInfos = searchImpl.getSearchResultBySkill(condition);
-		if (!indexViewInfos.isEmpty()) {
-			model.addAttribute("stuffMetas", indexViewInfos);
-			model.addAttribute("category", "検索結果　");
-			return "stuff_info";
+		try {
+			Long condition = Long.parseLong(skillSearchInfo.getLsSkill());
+			List<IndexViewInfo> indexViewInfos = searchImpl.getSearchResultBySkill(condition);
+			if (!indexViewInfos.isEmpty()) {
+				model.addAttribute("stuffMetas", indexViewInfos);
+				model.addAttribute("category", "検索結果　");
+				return "stuff_info";
+			}
+		} catch (Exception e) {
+			logger.info(e.getMessage());
 		}
 		model.addAttribute("skillSearchInfo", skillSearchInfo);
 		model.addAttribute("skillOptions", searchImpl.getSkillNameList());
