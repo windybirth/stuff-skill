@@ -5,4 +5,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class SkillMasterImpl {
 
+	public void skillView() {
+		
+	}
 }
