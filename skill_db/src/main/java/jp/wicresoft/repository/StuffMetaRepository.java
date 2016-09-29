@@ -21,6 +21,6 @@ public interface StuffMetaRepository extends Repository<StuffMeta, Long>{
 	
 	@Query(value = "select meta.* "
 			+ "from skill_version_mst v inner join stuff_skill s inner join stuff_meta meta "
-			+ "on v.skill_title = ?1 and v.skill_id = s.skill_id and s.stuff_id = meta.id;", nativeQuery = true)
-	public List<StuffMeta> findByIds(Long titleIds);
+			+ "on v.skill_title in ?1 and v.skill_id = s.skill_id and s.stuff_id = meta.id;", nativeQuery = true)
+	public List<StuffMeta> findByIds(List<Long> titleIds);
 }
