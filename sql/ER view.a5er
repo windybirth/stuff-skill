@@ -43,8 +43,8 @@ ViewOption=
 Query=select `v`.`skill_id` AS `skill_id`,`t`.`title_name` AS `title_name`,`v`.`version_name` AS `version_name` from (`skill`.`skill_title_mst` `t` join `skill`.`skill_version_mst` `v` on((`t`.`skill_title_id` = `v`.`skill_title`)))
 Color=$000000
 BkColor=$FFFFFF
-Position="Main",450,1050
-Page=Main
+Position="MAIN",450,1050
+Page=MAIN
 Left=450
 Top=1050
 
@@ -53,7 +53,7 @@ PName=skill_category_mst
 LName=skill_category_mst
 Comment=
 TableOption=
-Page=Main
+Page=MAIN
 Left=450
 Top=100
 Field="skill_category_id","skill_category_id","int(11) auto_increment","NOT NULL",0,"","",$FFFFFFFF,""
@@ -61,14 +61,14 @@ Field="category_name","category_name","varchar(50)","NOT NULL",,"","",$FFFFFFFF,
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-Position="Main",450,100
+Position="MAIN",450,100
 
 [Entity]
 PName=skill_title_mst
 LName=skill_title_mst
 Comment=
 TableOption=
-Page=Main
+Page=MAIN
 Left=450
 Top=400
 Field="skill_title_id","skill_title_id","int(11) auto_increment","NOT NULL",0,"","",$FFFFFFFF,""
@@ -78,14 +78,14 @@ Index=SKILL_TITLE_MST_SKILL_CATEGORY_FK1=0,skill_category
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-Position="Main",450,400
+Position="MAIN",450,400
 
 [Entity]
 PName=skill_version_mst
 LName=skill_version_mst
 Comment=
 TableOption=
-Page=Main
+Page=MAIN
 Left=450
 Top=750
 Field="skill_id","skill_id","int(11) auto_increment","NOT NULL",0,"","",$FFFFFFFF,""
@@ -95,7 +95,7 @@ Index=name_version=2,skill_title,version_name
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-Position="Main",450,750
+Position="MAIN",450,750
 
 [View]
 PName=stuff_db
@@ -105,8 +105,8 @@ ViewOption=
 Query=select `v`.`skill_id` AS `id`,`s`.`stuff_id` AS `stuff_id`,concat(`t`.`title_name`,\q \q,`v`.`version_name`) AS `db_name` from ((`skill`.`skill_title_mst` `t` join `skill`.`skill_version_mst` `v`) join `skill`.`stuff_skill` `s` on(((`t`.`skill_category` = 3) and (`t`.`skill_title_id` = `v`.`skill_title`) and (`v`.`skill_id` = `s`.`skill_id`))))
 Color=$000000
 BkColor=$FFFFFF
-Position="Main",2250,650
-Page=Main
+Position="MAIN",2250,650
+Page=MAIN
 Left=2250
 Top=650
 
@@ -118,8 +118,8 @@ ViewOption=
 Query=select `v`.`skill_id` AS `id`,`s`.`stuff_id` AS `stuff_id`,concat(`t`.`title_name`,\q \q,`v`.`version_name`) AS `develop_language_name` from ((`skill`.`skill_title_mst` `t` join `skill`.`skill_version_mst` `v`) join `skill`.`stuff_skill` `s` on(((`t`.`skill_category` = 4) and (`t`.`skill_title_id` = `v`.`skill_title`) and (`v`.`skill_id` = `s`.`skill_id`))))
 Color=$000000
 BkColor=$FFFFFF
-Position="Main",2250,900
-Page=Main
+Position="MAIN",2250,900
+Page=MAIN
 Left=2250
 Top=900
 
@@ -131,8 +131,8 @@ ViewOption=
 Query=select `v`.`skill_id` AS `id`,`s`.`stuff_id` AS `stuff_id`,concat(`t`.`title_name`,\q \q,`v`.`version_name`) AS `license_name` from ((`skill`.`skill_title_mst` `t` join `skill`.`skill_version_mst` `v`) join `skill`.`stuff_skill` `s` on(((`t`.`skill_category` = 1) and (`t`.`skill_title_id` = `v`.`skill_title`) and (`v`.`skill_id` = `s`.`skill_id`))))
 Color=$000000
 BkColor=$FFFFFF
-Position="Main",2250,150
-Page=Main
+Position="MAIN",2250,150
+Page=MAIN
 Left=2250
 Top=150
 
@@ -141,9 +141,9 @@ PName=stuff_meta
 LName=stuff_meta
 Comment=
 TableOption=
-Page=Main
-Left=1750
-Top=600
+Page=MAIN
+Left=1600
+Top=850
 Field="ID","id","int(11) auto_increment","NOT NULL",0,"","",$FFFFFFFF,""
 Field="名前","name","varchar(50)","NOT NULL",,"","",$FFFFFFFF,""
 Field="年齢","age","int(11)","NOT NULL",,"","",$FFFFFFFF,""
@@ -155,7 +155,7 @@ Field="自社社員 1:自社 0:他社","is_member","tinyint(4)","NOT NULL",,"","
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-Position="Main",1750,600
+Position="MAIN",1600,850
 
 [View]
 PName=stuff_os
@@ -165,8 +165,8 @@ ViewOption=
 Query=select `v`.`skill_id` AS `id`,`s`.`stuff_id` AS `stuff_id`,concat(`t`.`title_name`,\q \q,`v`.`version_name`) AS `os_name` from ((`skill`.`skill_title_mst` `t` join `skill`.`skill_version_mst` `v`) join `skill`.`stuff_skill` `s` on(((`t`.`skill_category` = 2) and (`t`.`skill_title_id` = `v`.`skill_title`) and (`v`.`skill_id` = `s`.`skill_id`))))
 Color=$000000
 BkColor=$FFFFFF
-Position="Main",2250,400
-Page=Main
+Position="MAIN",2250,400
+Page=MAIN
 Left=2250
 Top=400
 
@@ -175,7 +175,7 @@ PName=stuff_skill
 LName=stuff_skill
 Comment=
 TableOption=
-Page=Main
+Page=MAIN
 Left=1150
 Top=750
 Field="stuff_id","stuff_id","int(11)","NOT NULL",,"","",$FFFFFFFF,""
@@ -185,7 +185,7 @@ Index=STUFF_SKILL_SKILL_ID_FK1=0,skill_id
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-Position="Main",1150,750,243,85
+Position="MAIN",1150,750,243,85
 
 [Relation]
 Entity1=skill_category_mst
@@ -256,13 +256,13 @@ Fields1=id
 Fields2=stuff_id
 Cardinarity1=
 Cardinarity2=
-Position="MAIN",0,500,9500,500,R,R
+Position="MAIN",0,500,9500,580,R,R
 Dependence=0
 Caption=
 PName=
 LineMode=0
 Bar1=50
 Bar2=950
-Bar3=50
+Bar3=58
 TermPos1=R
 TermPos2=R

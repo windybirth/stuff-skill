@@ -25,44 +25,60 @@
 			<h2 class="col-sm-offset-4 col-sm-8">スキル情報検索</h2>
 			
 			<form class="form-horizontal" method="post" action="/search_result" th:object="${skillSearchInfo}">
-			  <div class="form-group">
-			    <label for="inputName" class="col-sm-4 control-label">スキル</label>
-			    <select th:field="*{lsSkill}" class="selectpicker"  data-live-search="true" title="下記のスキルを選択してください">
-					<optgroup label="資格">
-						<option th:each="skill : ${skillOptions}" th:if="${skill.skillCategory==1}" th:value="${skill.skillTitleId}"
-							th:text="${skill.titleName}"></option>
-					</optgroup>
-					<optgroup label="環境(OS)">
-						<option th:each="skill : ${skillOptions}" th:if="${skill.skillCategory==2}" th:value="${skill.skillTitleId}"
-							th:text="${skill.titleName}"></option>
-					</optgroup>
-					<optgroup label="DB">
-						<option th:each="skill : ${skillOptions}" th:if="${skill.skillCategory==3}" th:value="${skill.skillTitleId}"
-							th:text="${skill.titleName}"></option>
-					</optgroup>
-					<optgroup label="言語">
-						<option th:each="skill : ${skillOptions}" th:if="${skill.skillCategory==4}" th:value="${skill.skillTitleId}"
-							th:text="${skill.titleName}"></option>
-					</optgroup>
-				</select>
-				
-<!-- 			    <div class="col-sm-4" th:classappend="${#fields.hasErrors('name')} ? 'alert alert-danger'"> -->
-<!-- 			      <input type="text" class="form-control" id="inputName" placeholder="" th:field="*{name}"> -->
-<!-- 			      <span th:errors="*{name}"></span> -->
-<!-- 			    </div> -->
-			  </div>
-			  <div class="form-group">
-			    <div class="col-sm-offset-4 col-sm-4">
-			      <button type="submit" class="btn btn-success">検索</button>
-			    </div>
-			  </div>
+				<div class="selectList">
+				  <div class="form-group" th:each="row,rowStat : ${skillSearchInfo.lsSkill}">
+					<label for="inputName" class="col-sm-4 control-label">スキル</label>
+					<select th:field="${skillSearchInfo.lsSkill[__${rowStat.index}__]}"
+						class="selectpicker" data-live-search="true"
+						title="下記のスキルを選択してください">
+						<optgroup label="資格">
+							<option th:each="skill : ${skillOptions}"
+								th:if="${skill.skillCategory==1}"
+								th:value="${skill.skillTitleId}" th:text="${skill.titleName}"></option>
+						</optgroup>
+						<optgroup label="環境(OS)">
+							<option th:each="skill : ${skillOptions}"
+								th:if="${skill.skillCategory==2}"
+								th:value="${skill.skillTitleId}" th:text="${skill.titleName}"></option>
+						</optgroup>
+						<optgroup label="DB">
+							<option th:each="skill : ${skillOptions}"
+								th:if="${skill.skillCategory==3}"
+								th:value="${skill.skillTitleId}" th:text="${skill.titleName}"></option>
+						</optgroup>
+						<optgroup label="言語">
+							<option th:each="skill : ${skillOptions}"
+								th:if="${skill.skillCategory==4}"
+								th:value="${skill.skillTitleId}" th:text="${skill.titleName}"></option>
+						</optgroup>
+					</select>
+				  </div>
+				</div>
+				<div class="form-group">
+					<label id="addCondition" class="btn btn-primary col-sm-offset-4">
+						<span class="glyphicon glyphicon-plus"></span> 検索条件追加
+					</label>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-4 col-sm-4">
+						<button type="submit" class="btn btn-success">検索</button>
+					</div>
+				</div>
 			</form>
 		</div>
 		
 		<div th:include="include :: footer"></div>
 		
 		<script type="text/javascript">
-
+		$(document).ready(function() {
+			// add row
+			$("#addCondition").on("click",function(){
+				var iteration = $('.selectList:last');
+				iteration.clone(true).insertAfter(iteration);
+				console.log(iteration.html());
+			});
+		});
+		
 		</script>
 	</body>
 </html>

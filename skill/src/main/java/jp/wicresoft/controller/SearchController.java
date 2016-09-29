@@ -1,5 +1,6 @@
 package jp.wicresoft.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -26,7 +27,10 @@ public class SearchController {
 	@RequestMapping(value={"/search"})
 	public String loadPage(Model model) {
 		model.addAttribute("page", "search");
-		model.addAttribute("skillSearchInfo", new SkillSearchInfo());
+		SkillSearchInfo skill = new SkillSearchInfo();
+		skill.setLsSkill(new ArrayList<String>());
+		skill.getLsSkill().add("0");
+		model.addAttribute("skillSearchInfo", skill);
 		model.addAttribute("skillOptions", searchImpl.getSkillNameList());
 		return "search";
 	}
@@ -37,15 +41,25 @@ public class SearchController {
 		model.addAttribute("page", "search");
 		
 		try {
-			Long condition = Long.parseLong(skillSearchInfo.getLsSkill());
-			List<IndexViewInfo> indexViewInfos = searchImpl.getSearchResultBySkill(condition);
+			List<Long> conditionList = new ArrayList<Long>();
+			for (String skillIdStr : skillSearchInfo.getLsSkill()) {
+				conditionList.add(Long.parseLong(skillIdStr));
+			}
+			if (conditionList.isEmpty()) {
+				// 検索条件がない場合
+				model.addAttribute("skillSearchInfo", skillSearchInfo);
+				model.addAttribute("skillOptions", searchImpl.getSkillNameList());
+				return "search";
+			}
+			List<IndexViewInfo> indexViewInfos = searchImpl.getSearchResultBySkill(conditionList);
 			if (!indexViewInfos.isEmpty()) {
+				// 結果を出す
 				model.addAttribute("stuffMetas", indexViewInfos);
 				model.addAttribute("category", "検索結果　");
 				return "stuff_info";
 			}
 		} catch (Exception e) {
-			logger.info(e.getMessage());
+			logger.info(e.getLocalizedMessage());
 		}
 		model.addAttribute("skillSearchInfo", skillSearchInfo);
 		model.addAttribute("skillOptions", searchImpl.getSkillNameList());

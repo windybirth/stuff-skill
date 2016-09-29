@@ -1,9 +1,11 @@
 package jp.wicresoft.info;
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
 public class SkillSearchInfo {
 
-	String lsSkill;
+	List<String> lsSkill;
 }
