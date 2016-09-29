@@ -52,6 +52,6 @@ public class IndexController {
 	@RequestMapping(value = "/stuffDetail/{id}")
 	public String stuffDetailInfo(@PathVariable long id , Model model) {
 		model.addAttribute("skillDetail", indexImpl.getIndexSkillDetailInfo(id));
-		return "index_subrow";
+		return "stuff_subrow";
 	}
 }

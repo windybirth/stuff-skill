@@ -25,16 +25,9 @@
 		<!-- Latest compiled and minified JavaScript -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/js/bootstrap-select.min.js"></script>
 		<!-- (Optional) Latest compiled and minified JavaScript translation files -->
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/js/i18n/defaults-*.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/js/i18n/defaults-ar_AR.min.js"></script>
 	</head>
 	<body>
-		<div class="navbar navbar-default navbar-fixed-top" th:fragment="header1">
-			<div class="container" align="center">
-				<h1>ウィクレソフト・ジャパン　スキル情報管理システム</h1>
-			</div>
-<!-- 			<hr> -->
-		</div>
-		
 		<nav th:fragment="header">
 			<div class="navbar navbar-inverse navbar-fixed-top">
 			    <div class="container">
@@ -78,63 +71,6 @@
 			    </div>
 			</div>
 		</nav>
-		
-		<!-- 			SAMPLE           -->
-		  <div class="navbar navbar-inverse navbar-fixed-top"  th:fragment="header3">
-		  <!-- ヘッダー部分 ================ -->
-		    <div class="navbar-header">
-		      <a class="navbar-brand" href="#">Bootstap</a>
-		      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav_target">
-		        <span class="icon-bar"></span>
-		        <span class="icon-bar"></span>
-		        <span class="icon-bar"></span>
-		      </button>
-		    </div>
-		  <!-- 中央のナビゲーション部分 ================ -->
-		    <div class="collapse navbar-collapse" id="nav_target">
-		      <ul class="nav navbar-nav">
-		        <!-- リンクのみ -->
-		          <li class="active"><a href="#">Nav 1</a></li>
-		          <li><a href="#">Nav 2</a></li>
-		        <!-- Nav3 ドロップダウン -->
-		          <li class="dropdown">
-		            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Nav3 <span class="caret"></span></a>
-		            <ul class="dropdown-menu">
-		              <li><a href="#">link 1</a></li>
-		              <li><a href="#">link 2</a></li>
-		              <li class="divider"></li>
-		              <li><a href="#">link3</a></li>
-		            </ul>
-		          </li>
-		        <!-- Nav4 ドロップダウン -->
-		          <li class="dropdown">
-		            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Nav4 <span class="caret"></span></a>
-		            <ul class="dropdown-menu">
-		              <li><a href="#">link 1</a></li>
-		              <li><a href="#">link 2</a></li>
-		              <li class="divider"></li>
-		              <li><a href="#">link3</a></li>
-		            </ul>
-		          </li>
-		      </ul>
-		  <!-- 右寄せになる部分 ================ -->
-		      <ul class="nav navbar-nav navbar-right">
-		        <!-- リンクのみ -->
-		          <li><a href="#">Nav 5</a></li>
-		        <!-- Nav6 ドロップダウン -->
-		          <li class="dropdown">
-		            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Nav6 <span class="caret"></span></a>
-		            <ul class="dropdown-menu">
-		              <li><a href="#">link 1</a></li>
-		              <li><a href="#">link 2</a></li>
-		              <li class="divider"></li>
-		              <li><a href="#">link3</a></li>
-		            </ul>
-		          </li>
-		      </ul>
-		    </div>
-		  </div>
-		
 		
 		<div th:fragment="footer">
 			<div align="right" class="navbar-fixed-bottom">

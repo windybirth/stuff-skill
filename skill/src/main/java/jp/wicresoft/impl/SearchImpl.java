@@ -25,7 +25,7 @@ public class SearchImpl {
 		return skillTitleMstRepository.findAll();
 	}
 	
-	public List<IndexViewInfo> getSearchResultBySkill(Long titleIds) {
+	public List<IndexViewInfo> getSearchResultBySkill(List<Long> titleIds) {
 		List<StuffMeta> stuffMetas  = stuffMetaRepository.findByIds(titleIds);
 		List<IndexViewInfo> indexViewInfos = new ArrayList<>();
 		for (StuffMeta stuffMeta : stuffMetas) {

@@ -8,11 +8,11 @@
 		<meta http-equiv="x-ua-compatible" content="ie=edge">
 		
 		<!-- 共通のリンクとスクリプト -->
-		<link th:replace="include :: head">
+		<link th:include="include :: head">
 	</head>
 	
 	<body>
-		<div th:replace="include :: header"></div>
+		<div th:include="include :: header"></div>
 		<br>
 		<div align="center" class="col-xs-12 col-md-6 col-md-offset-3">
 			<a href="/self_stuff" class="btn btn-success btn-lg btn-block" style="margin: 10px">自社社員情報一覧</a>
