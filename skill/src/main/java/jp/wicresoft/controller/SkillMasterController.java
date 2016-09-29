@@ -15,6 +15,7 @@ public class SkillMasterController {
 	
 	@RequestMapping(value="/skill")
 	public String skillView(Model model) {
+		model.addAttribute("skills", skillMasterImpl.skillView());
 		model.addAttribute("page", "master");
 		
 		return "skill_view";

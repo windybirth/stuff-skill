@@ -21,15 +21,15 @@
 					<tr>
 						<th>#</th>
 						<th>スキル</th>
-						<th>詳細情報</th>
+<!-- 						<th>詳細情報</th> -->
 						<th>操作</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr class="openRow" th:each="skill,iterStat : ${skills}">
-						<th th:text="${skill.id}"></th>
-						<td th:text="${skill.name}"></td>
-						<td><a th:href="@{skill_edit} + '/' + ${skill.id}">Edit</a></td>
+						<th th:text="${skill.skillTitleId}"></th>
+						<td th:text="${skill.titleName}"></td>
+						<td><a th:href="@{skill_edit} + '/' + ${skill.skillTitleId}">Edit</a></td>
 					</tr>
 				</tbody>
 			</table>
