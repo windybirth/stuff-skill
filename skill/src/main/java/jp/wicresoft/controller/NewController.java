@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import jp.wicresoft.impl.NewImpl;
 import jp.wicresoft.info.IndexViewInfo;
@@ -29,7 +30,7 @@ public class NewController {
 		return "new";
 	}
 	
-	@RequestMapping(value={"/new_add"})
+	@RequestMapping(value = {"/new_add"}, method = RequestMethod.POST)
 	public String addInfo(@Valid IndexViewInfo indexViewInfo, BindingResult bindingResult, Model model) {
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("indexViewInfo", indexViewInfo);
