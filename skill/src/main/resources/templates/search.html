@@ -24,12 +24,12 @@
 		<div class="container">
 			<h2 class="col-sm-offset-4 col-sm-8">スキル情報検索</h2>
 			
-			<form class="form-horizontal" method="post" action="/search_result" th:object="${skillSearchInfo}">
+			<form class="form-horizontal" method="post" action="/search" th:object="${skillSearchInfo}">
 				<div class="selectList">
 				  <div class="form-group" th:each="row,rowStat : ${skillSearchInfo.lsSkill}">
 					<label for="inputName" class="col-sm-4 control-label">スキル</label>
-					<select th:field="${skillSearchInfo.lsSkill[__${rowStat.index}__]}"
-						class="selectpicker" data-live-search="true"
+					<select id="" th:field="${skillSearchInfo.lsSkill[__${rowStat.index}__]}"
+						class="selectpicker dynamic-select" data-live-search="true"
 						title="下記のスキルを選択してください">
 						<optgroup label="資格">
 							<option th:each="skill : ${skillOptions}"
@@ -73,9 +73,55 @@
 		$(document).ready(function() {
 			// add row
 			$("#addCondition").on("click",function(){
-				var iteration = $('.selectList:last');
-				iteration.clone(true).insertAfter(iteration);
-				console.log(iteration.html());
+
+// 				$.ajax({
+// 					type : "POST",
+// 					url : "/search_addSelect",
+// 					dataType : 'html',
+// 					cache: false,
+// 					timeout : 10000,
+// 					success : function(data) {
+// 						console.log();
+// 						var form = $('form');
+// 						console.log("SUCCESS: ", data);
+// 						form.html(data);
+// 						$('.selectpicker').selectpicker('render');
+// 					},
+// 					error : function(e) {
+// 						console.log("ERROR: ", e);
+// 						alert('サーバーとの通信で問題が発生しました。 後でもう一度お試しください。');
+// 					},
+// 					done : function(e) {
+// 						console.log("DONE");
+// 					}
+// 				});
+				
+				$.ajax({
+					type : "POST",
+					url : "/search_addSelect",
+					data: {
+		                "index": $("select.dynamic-select").length
+		            },
+					dataType : 'html',
+					cache: false,
+					timeout : 10000,
+					success : function(data) {
+						console.log();
+						var select = $('.selectList:last');
+						console.log("SUCCESS: ", data);
+						
+						select.after(data);
+						$('.selectpicker').selectpicker('render');
+					},
+					error : function(e) {
+						console.log("ERROR: ", e);
+						alert('サーバーとの通信で問題が発生しました。 後でもう一度お試しください。');
+					},
+					done : function(e) {
+						console.log("DONE");
+					}
+				});
+				
 			});
 		});
 		
