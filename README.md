@@ -1,6 +1,5 @@
 # stuff-skill
-  stuff skill manage system
-
+  This is a simple manage system based on Spring framework.
 
 # Technologies used
 -  Spring Boot 1.4.0
