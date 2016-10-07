@@ -27,7 +27,6 @@ public class BasicJdbc {
 				}
 				resultList.add(object);
 			} catch (SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | InstantiationException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
