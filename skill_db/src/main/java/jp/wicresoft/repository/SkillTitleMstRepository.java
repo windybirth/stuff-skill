@@ -6,7 +6,7 @@ import org.springframework.data.repository.Repository;
 
 import jp.wicresoft.domain.SkillTitleMst;
 
-public interface SkillTitleMstRepository extends Repository<SkillTitleMst, Long> {
+public interface SkillTitleMstRepository extends Repository<SkillTitleMst, Integer> {
 
 	public List<SkillTitleMst> findAll();
 }

@@ -10,9 +10,9 @@ import lombok.Data;
 public class SkillTitleMst {
 
 	@Id
-	private Long skillTitleId;
+	private int skillTitleId;
 	
 	private String titleName;
 	
-	private Long skillCategory;
+	private int skillCategory;
 }

@@ -48,9 +48,9 @@ public class SearchController {
 		}
 		
 		try {
-			List<Long> conditionList = new ArrayList<Long>();
+			List<Integer> conditionList = new ArrayList<Integer>();
 			for (String skillIdStr : skillSearchInfo.getLsSkill()) {
-				conditionList.add(Long.parseLong(skillIdStr));
+				conditionList.add(Integer.parseInt(skillIdStr));
 			}
 			List<IndexViewInfo> indexViewInfos = searchImpl.getSearchResultBySkill(conditionList);
 			// 結果を出す

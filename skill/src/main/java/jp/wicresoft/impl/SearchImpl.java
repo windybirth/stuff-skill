@@ -29,7 +29,7 @@ public class SearchImpl {
 		return skillTitleMstRepository.findAll();
 	}
 	
-	public List<IndexViewInfo> getSearchResultBySkill(List<Long> titleIds) {
+	public List<IndexViewInfo> getSearchResultBySkill(List<Integer> titleIds) {
 		List<StuffMeta> stuffMetas  = skillSearchJdbcTemplate.findByIds(titleIds);
 		List<IndexViewInfo> indexViewInfos = new ArrayList<>();
 		for (StuffMeta stuffMeta : stuffMetas) {
