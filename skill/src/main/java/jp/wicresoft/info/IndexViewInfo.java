@@ -45,11 +45,11 @@ public class IndexViewInfo {
 	 */
 	public IndexViewInfo(StuffMeta stuffMeta) {
 		
-		setId(stuffMeta.getId().toString());
+		setId(String.valueOf(stuffMeta.getId()));
 		
 		setName(stuffMeta.getName());
 		
-		setAge(stuffMeta.getAge().toString());
+		setAge(String.valueOf(stuffMeta.getAge()));
 		
 		setSex(stuffMeta.isSex() ? "true" : "false");
 		
@@ -70,11 +70,11 @@ public class IndexViewInfo {
 		StuffMeta stuffMeta = new StuffMeta();
 		
 		stuffMeta.setName(getName());
-		stuffMeta.setAge(Long.parseLong(getAge()));
+		stuffMeta.setAge(Integer.parseInt(getAge()));
 		// TODO
 		stuffMeta.setSex(false);
-		stuffMeta.setExperienceYear(Long.parseLong(getExperienceYear()));
-		stuffMeta.setPrice(Long.parseLong(getPrice()));
+		stuffMeta.setExperienceYear(Integer.parseInt(getExperienceYear()));
+		stuffMeta.setPrice(Integer.parseInt(getPrice()));
 		stuffMeta.setNationality(getNationality());
 		stuffMeta.setMember(isMember());
 		

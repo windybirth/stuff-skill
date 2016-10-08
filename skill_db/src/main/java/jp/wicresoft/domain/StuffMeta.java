@@ -19,19 +19,20 @@ public class StuffMeta implements Serializable{
 
 	@Id
 	@GeneratedValue
-	private Long id;
+	private int id;
 	
 	private String name;
 	
-	private Long age;
+	private int age;
 	
 	private boolean sex;
 	
 	private String nationality;
 	
-	private Long experienceYear;
+	private int experienceYear;
 	
-	private Long price;
+	private int price;
 	
 	private boolean isMember;
+	
 }

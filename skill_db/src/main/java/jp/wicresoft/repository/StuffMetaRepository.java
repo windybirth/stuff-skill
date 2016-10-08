@@ -7,7 +7,7 @@ import org.springframework.data.repository.Repository;
 
 import jp.wicresoft.domain.StuffMeta;
 
-public interface StuffMetaRepository extends Repository<StuffMeta, Long>{
+public interface StuffMetaRepository extends Repository<StuffMeta, Integer>{
 
 	public List<StuffMeta> findAll();
 	
