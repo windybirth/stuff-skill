@@ -17,7 +17,7 @@ public interface StuffMetaRepository extends Repository<StuffMeta, Integer>{
 	
 	public void save(StuffMeta stuffMeta);
 	
-	public void saveAndFlush(StuffMeta stuffMeta);
+	public StuffMeta saveAndFlush(StuffMeta stuffMeta);
 	
 	@Query(value = "select meta.* "
 			+ "from skill_version_mst v inner join stuff_skill s inner join stuff_meta meta "

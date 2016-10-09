@@ -14,8 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import jp.wicresoft.impl.SearchImpl;
+import jp.wicresoft.impl.SkillSelectImpl;
 import jp.wicresoft.info.IndexViewInfo;
-import jp.wicresoft.info.SkillSearchInfo;
+import jp.wicresoft.info.SkillSelectInfo;
 
 @Controller
 public class SearchController {
@@ -23,33 +24,36 @@ public class SearchController {
 	@Autowired
 	SearchImpl searchImpl;
 	
+	@Autowired
+	SkillSelectImpl skillSelectImpl;
+	
 	Logger logger = LoggerFactory.getLogger(NewController.class);
 	
 	@RequestMapping(value={"/search"}, method=RequestMethod.GET)
 	public String loadPage(Model model) {
 		model.addAttribute("page", "search");
-		SkillSearchInfo skill = new SkillSearchInfo();
+		SkillSelectInfo skill = new SkillSelectInfo();
 		skill.setLsSkill(new ArrayList<String>());
 		skill.getLsSkill().add("0");
-		model.addAttribute("skillSearchInfo", skill);
-		model.addAttribute("skillOptions", searchImpl.getSkillNameList());
+		model.addAttribute("skillSelectInfo", skill);
+		model.addAttribute("skillOptions", skillSelectImpl.getSkillNameList());
 		return "search";
 	}
 	
 	@RequestMapping(value={"/search"}, method=RequestMethod.POST)
-	public String loadPage(@Valid SkillSearchInfo skillSearchInfo, Model model) {
-		logger.info("Search for: " + skillSearchInfo.getLsSkill());
+	public String loadPage(@Valid SkillSelectInfo skillSelectInfo, Model model) {
+		logger.info("Search for: " + skillSelectInfo.getLsSkill());
 		model.addAttribute("page", "search");
-		if (skillSearchInfo.getLsSkill().isEmpty()) {
+		if (skillSelectInfo.getLsSkill().isEmpty()) {
 			// 検索条件がない場合
-			model.addAttribute("skillSearchInfo", skillSearchInfo);
-			model.addAttribute("skillOptions", searchImpl.getSkillNameList());
+			model.addAttribute("skillSelectInfo", skillSelectInfo);
+			model.addAttribute("skillOptions", skillSelectImpl.getSkillNameList());
 			return "search";
 		}
 		
 		try {
 			List<Integer> conditionList = new ArrayList<Integer>();
-			for (String skillIdStr : skillSearchInfo.getLsSkill()) {
+			for (String skillIdStr : skillSelectInfo.getLsSkill()) {
 				conditionList.add(Integer.parseInt(skillIdStr));
 			}
 			List<IndexViewInfo> indexViewInfos = searchImpl.getSearchResultBySkill(conditionList);
@@ -60,8 +64,8 @@ public class SearchController {
 		} catch (Exception e) {
 			logger.info(e.getLocalizedMessage());
 		}
-		model.addAttribute("skillSearchInfo", skillSearchInfo);
-		model.addAttribute("skillOptions", searchImpl.getSkillNameList());
+		model.addAttribute("skillSelectInfo", skillSelectInfo);
+		model.addAttribute("skillOptions", skillSelectImpl.getSkillNameList());
 		
 		return "search";
 	}
@@ -69,14 +73,14 @@ public class SearchController {
 	@RequestMapping(value={"/search_addSelect"}, method=RequestMethod.POST)
 	public String addSelect(@RequestParam(value = "index", required = false) int index, Model model) {
 		logger.info("Selector have now: " + String.valueOf(index));
-		SkillSearchInfo skill = new SkillSearchInfo();
+		SkillSelectInfo skill = new SkillSelectInfo();
 		
 		skill.setLsSkill(new ArrayList<String>());
 		skill.getLsSkill().add("0");
-		model.addAttribute("skillSearchInfo", skill);
+		model.addAttribute("skillSelectInfo", skill);
 		// set dynamic index
 		model.addAttribute("index", index);
-		model.addAttribute("skillOptions", searchImpl.getSkillNameList());
-		return "search_subrow";
+		model.addAttribute("skillOptions", skillSelectImpl.getSkillNameList());
+		return "skill_select";
 	}
 }

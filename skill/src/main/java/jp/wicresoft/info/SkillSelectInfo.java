@@ -5,7 +5,7 @@ import java.util.List;
 import lombok.Data;
 
 @Data
-public class SkillSearchInfo {
+public class SkillSelectInfo {
 
 	List<String> lsSkill;
 }
