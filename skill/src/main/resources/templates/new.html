@@ -73,6 +73,7 @@
 			      </div>
 			    </div>
 			  </div>
+				<!-- 			  select area -->
 			  <div class="selectList">
 				  <div class="form-group" th:each="row,rowStat : ${skillSelectInfo.lsSkill}">
 					<label for="inputName" class="col-sm-4 control-label">スキル</label>
@@ -102,6 +103,12 @@
 					</select>
 				  </div>
 				</div>
+				<div class="form-group">
+					<label id="addSelector" class="btn btn-primary col-sm-offset-4">
+						<span class="glyphicon glyphicon-plus"></span> 検索条件追加
+					</label>
+				</div>
+				
 			  <div class="form-group">
 			    <div class="col-sm-offset-4 col-sm-4">
 			      <button type="submit" class="btn btn-success">新規</button>
@@ -113,7 +120,38 @@
 		<div th:include="include :: footer"></div>
 		
 		<script type="text/javascript">
+		$(document).ready(function() {
+			// add row
+			$("#addSelector").on("click",function(){
 
+				$.ajax({
+					type : "POST",
+					url : "/search_addSelect",
+					data: {
+		                "index": $("select.dynamic-select").length
+		            },
+					dataType : 'html',
+					cache: false,
+					timeout : 10000,
+					success : function(data) {
+						console.log();
+						var select = $('.selectList:last');
+						console.log("SUCCESS: ", data);
+						
+						select.after(data);
+						$('.selectpicker').selectpicker('render');
+					},
+					error : function(e) {
+						console.log("ERROR: ", e);
+						alert('サーバーとの通信で問題が発生しました。 後でもう一度お試しください。');
+					},
+					done : function(e) {
+						console.log("DONE");
+					}
+				});
+				
+			});
+		});
 		</script>
 	</body>
 </html>

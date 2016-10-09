@@ -1,9 +1,10 @@
 package jp.wicresoft.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
+import java.io.Serializable;
 
+import javax.persistence.Embeddable;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,20 +13,30 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@IdClass(StuffSkill.StuffId.class)
+//@IdClass(StuffSkill.StuffId.class)
 public class StuffSkill {
 
-	@Id
-	int stuffId;
+	@EmbeddedId
+    private PkMapping pk;
 	
-	@Id
-	int skillId;
-	
-	static class StuffId {
-		
-		int stuffId;
-		
-		int skillId;
-		
+	public StuffSkill(int stuffId, int skillId) {
+		this.pk = new PkMapping(stuffId, skillId);
 	}
+}
+
+@Embeddable
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+class PkMapping implements Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -523753799587581317L;
+
+	private int stuffId;
+	
+	private int skillId;
+	
 }

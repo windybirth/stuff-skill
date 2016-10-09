@@ -75,21 +75,6 @@ CREATE TABLE `stuff_db` (
 ) ENGINE=MyISAM;
 
 
--- Dumping structure for テーブル skill.stuff_db_back
-DROP TABLE IF EXISTS `stuff_db_back`;
-CREATE TABLE IF NOT EXISTS `stuff_db_back` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `stuff_id` int(11) NOT NULL COMMENT '社員ナンバー',
-  `db_name` varchar(50) NOT NULL COMMENT 'DB名称',
-  `note` varchar(50) NOT NULL COMMENT '備考',
-  PRIMARY KEY (`id`),
-  KEY `stuff_id` (`stuff_id`),
-  CONSTRAINT `STUFF_DB_STUFF_ID_FK` FOREIGN KEY (`stuff_id`) REFERENCES `stuff_meta` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- エクスポートするデータが選択されていません
-
-
 -- Dumping structure for ビュー skill.stuff_develop_language
 DROP VIEW IF EXISTS `stuff_develop_language`;
 -- Creating temporary table to overcome VIEW dependency errors
@@ -100,20 +85,6 @@ CREATE TABLE `stuff_develop_language` (
 ) ENGINE=MyISAM;
 
 
--- Dumping structure for テーブル skill.stuff_develop_language_back
-DROP TABLE IF EXISTS `stuff_develop_language_back`;
-CREATE TABLE IF NOT EXISTS `stuff_develop_language_back` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `stuff_id` int(11) NOT NULL COMMENT '社員ナンバー',
-  `develop_language_name` varchar(50) NOT NULL COMMENT '言語名称',
-  PRIMARY KEY (`id`),
-  KEY `stuff_id` (`stuff_id`),
-  CONSTRAINT `STUFF_DEVELOP_LANGUAGE_STUFF_ID_FK` FOREIGN KEY (`stuff_id`) REFERENCES `stuff_meta` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- エクスポートするデータが選択されていません
-
-
 -- Dumping structure for ビュー skill.stuff_license
 DROP VIEW IF EXISTS `stuff_license`;
 -- Creating temporary table to overcome VIEW dependency errors
@@ -122,20 +93,6 @@ CREATE TABLE `stuff_license` (
 	`stuff_id` INT(11) NOT NULL,
 	`license_name` VARCHAR(101) NOT NULL COLLATE 'utf8mb4_general_ci'
 ) ENGINE=MyISAM;
-
-
--- Dumping structure for テーブル skill.stuff_license_back
-DROP TABLE IF EXISTS `stuff_license_back`;
-CREATE TABLE IF NOT EXISTS `stuff_license_back` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `stuff_id` int(11) NOT NULL COMMENT '社員ナンバー',
-  `license_name` varchar(50) NOT NULL COMMENT '資格名称',
-  PRIMARY KEY (`id`),
-  KEY `stuff_id` (`stuff_id`),
-  CONSTRAINT `STUFF_LICENSE_STUFF_ID_FK` FOREIGN KEY (`stuff_id`) REFERENCES `stuff_meta` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- エクスポートするデータが選択されていません
 
 
 -- Dumping structure for テーブル skill.stuff_meta
@@ -165,25 +122,12 @@ CREATE TABLE `stuff_os` (
 ) ENGINE=MyISAM;
 
 
--- Dumping structure for テーブル skill.stuff_os_back
-DROP TABLE IF EXISTS `stuff_os_back`;
-CREATE TABLE IF NOT EXISTS `stuff_os_back` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `stuff_id` int(11) NOT NULL COMMENT '社員ナンバー',
-  `os_name` varchar(50) NOT NULL COMMENT '環境(OS)名称',
-  PRIMARY KEY (`id`),
-  KEY `stuff_id` (`stuff_id`),
-  CONSTRAINT `STUFF_OS_STUFF_ID_FK` FOREIGN KEY (`stuff_id`) REFERENCES `stuff_meta` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- エクスポートするデータが選択されていません
-
-
 -- Dumping structure for テーブル skill.stuff_skill
 DROP TABLE IF EXISTS `stuff_skill`;
 CREATE TABLE IF NOT EXISTS `stuff_skill` (
   `stuff_id` int(11) NOT NULL,
   `skill_id` int(11) NOT NULL,
+  PRIMARY KEY (`stuff_id`,`skill_id`),
   KEY `STUFF_SKILL_STUFF_ID_FK1` (`stuff_id`),
   KEY `STUFF_SKILL_SKILL_ID_FK1` (`skill_id`),
   CONSTRAINT `STUFF_SKILL_SKILL_ID_FK1` FOREIGN KEY (`skill_id`) REFERENCES `skill_version_mst` (`skill_id`),
