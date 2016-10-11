@@ -12,6 +12,7 @@
 -  JDK 1.8
 -  Tomcat 8
 -  STS 3.8.1
+-  MySql 5.7
 
 > *NOTE:* You'll still need to download lombok, or doubleclick on the lombok.jar file downloaded by maven / ivy / gradle, to install lombok into your eclipse installation.  
 > [Download lombok.jar] (https://projectlombok.org/downloads/lombok.jar)
